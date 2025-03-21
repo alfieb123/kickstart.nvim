@@ -259,6 +259,20 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     vim.cmd 'normal! zM' -- Close all folds
   end,
 })
+-- load the saved theme from the file
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'VeryLazy',
+  callback = function()
+    local saved = require 'saved_theme'
+    local theme = saved.load()
+
+    if theme then
+      vim.cmd.colorscheme(theme)
+    else
+      vim.cmd.colorscheme 'catppuccin' -- fallback
+    end
+  end,
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -678,7 +692,7 @@ require('lazy').setup({
                 width = 0.9,
                 height = 0.9,
                 prompt_position = 'top',
-                mirror = true, -- flip the results to the top
+                mirror = true,
               },
             }
           end, '[G]oto [R]eferences')
@@ -686,6 +700,28 @@ require('lazy').setup({
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+          -- map('<leader>tt', require('telescope.builtin').colorscheme, '[T]oggle [T]heme')
+
+          map('<leader>tt', function()
+            require('telescope.builtin').colorscheme {
+              enable_preview = true,
+              attach_mappings = function(_, map)
+                map('i', '<CR>', function(prompt_bufnr)
+                  local entry = require('telescope.actions.state').get_selected_entry()
+                  local saved = require 'saved_theme'
+                  saved.save(entry.value)
+                  require('telescope.actions').close(prompt_bufnr)
+                  -- Delay colorscheme a tiny bit to ensure clean redraw
+                  vim.defer_fn(function()
+                    vim.cmd.colorscheme(entry.value)
+                    print('Theme set to: ' .. entry.value)
+                  end, 10)
+                end)
+                return true
+              end,
+            }
+          end, '[T]oggle [T]heme')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
@@ -1143,9 +1179,29 @@ require('lazy').setup({
           background = true, -- use background color for virtual text
         },
       }
-      vim.cmd.colorscheme 'onedark'
+      -- vim.cmd.colorscheme 'onedark'
     end,
   },
+  -- Catppuccin (Soft, modern, pastel)
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+
+  -- Rose Pine (Elegant and warm)
+  { 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
+
+  -- Gruvbox (Classic contrast, warm colours)
+  { 'ellisonleao/gruvbox.nvim', priority = 1000 },
+
+  -- Solarized (Light & dark with low contrast)
+  { 'maxmx03/solarized.nvim', priority = 1000 },
+
+  -- Nightfox (Includes nordfox, duskfox, etc.)
+  { 'EdenEast/nightfox.nvim', priority = 1000 },
+
+  -- Dracula (Popular, vibrant dark theme)
+  { 'Mofiqul/dracula.nvim', priority = 1000 },
+
+  -- Nord (Cool and calming arctic feel)
+  { 'shaunsingh/nord.nvim', priority = 1000 },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

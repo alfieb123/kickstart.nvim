@@ -1334,6 +1334,10 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+
+  {
+    'github/copilot.vim',
+  },
   { 'habamax/vim-godot', event = 'VimEnter' },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the

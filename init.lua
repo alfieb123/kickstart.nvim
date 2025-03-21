@@ -161,6 +161,11 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+vim.opt.tabstop = 4 -- how many columns a tab counts for
+vim.opt.shiftwidth = 4 -- how many spaces to use for autoindent
+vim.opt.softtabstop = 4 -- how many spaces a <Tab> feels like
+vim.opt.expandtab = true -- use spaces instead of tabs
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -321,7 +326,7 @@ end
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -411,29 +416,42 @@ require('lazy').setup({
       -- log_level = 'debug',
     },
   },
-  {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-      {
-        's',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').jump()
-        end,
-        desc = 'Flash Jump',
-      },
-      {
-        'S',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').treesitter()
-        end,
-        desc = 'Flash Treesitter',
-      },
+{
+  'folke/flash.nvim',
+  event = 'VeryLazy',
+  opts = {},
+  keys = {
+    {
+      's',
+      mode = { 'n', 'x', 'o' },
+      function()
+        require('flash').jump({
+          search = {
+            -- allow two characters for wider jump range
+            max_length = 2,
+          },
+          label = {
+            -- show labels after match is narrowed (fewer distractions early)
+            after = true,
+            before = false,
+          },
+          jump = {
+            autojump = true, -- jump immediately if only one match
+          },
+        })
+      end,
+      desc = 'Flash Jump (2-char)',
+    },
+    {
+      'S',
+      mode = { 'n', 'x', 'o' },
+      function()
+        require('flash').treesitter()
+      end,
+      desc = 'Flash Treesitter Jump',
     },
   },
+},
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -867,7 +885,6 @@ require('lazy').setup({
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      capabilities.textDocument.completion.completionItem.snippetSupport = false -- this line stops function param names being auto filled!
       -- ALFIE SETTING UP GDSCRIPT STUFF
       require('lspconfig').gdscript.setup(capabilities)
 
@@ -1113,7 +1130,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'nvim_lsp_signature_help' },
+          -- { name = 'nvim_lsp_signature_help' }, -- ALFIE! YOU HAVE DISABLED THIS AS IT COMPLETES FUNCTION SIGNATUREES!
         },
       }
     end,

@@ -242,6 +242,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- ALFIE AUTOCOMMANDS
+-- set code files to not wrap, but other files to wrap
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'lua', 'python', 'bash', 'vim', 'gdscript', 'godot_resource', 'gdshader', 'html', 'javascript', 'typescript' },
+  callback = function()
+    vim.opt.wrap = false
+  end,
+})
+-- automatically fold all gd files - NOTE: this will not work on restored sessions! just newly opened files
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.gd',
+  callback = function()
+    vim.opt.foldmethod = 'expr'
+    vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+    vim.cmd 'normal! zM' -- Close all folds
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

@@ -273,6 +273,22 @@ vim.api.nvim_create_autocmd('User', {
     end
   end,
 })
+-- run session restore if there is a session!
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    local session_dir = vim.fn.stdpath 'data' .. '/sessions/'
+    local cwd = vim.fn.getcwd()
+    local session_name = cwd:gsub('[/\\]', '%%') .. '.vim'
+    local session_file = session_dir .. session_name
+
+    -- Only restore if the session file exists
+    if vim.fn.filereadable(session_file) == 1 then
+      vim.schedule(function()
+        vim.cmd 'SessionRestore'
+      end)
+    end
+  end,
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

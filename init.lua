@@ -748,6 +748,11 @@ require('lazy').setup({
           vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
           vim.keymap.set('v', '<leader>p', '"+p', { desc = 'Paste over selection from clipboard' })
 
+          -- buffer stuff
+          vim.keymap.set('n', '<F5>', ':bnext<CR>', { desc = 'Next buffer' })
+          vim.keymap.set('n', '<F6>', ':bprevious<CR>', { desc = 'Previous buffer' })
+          vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
+
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
@@ -862,6 +867,7 @@ require('lazy').setup({
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities.textDocument.completion.completionItem.snippetSupport = false -- this line stops function param names being auto filled!
       -- ALFIE SETTING UP GDSCRIPT STUFF
       require('lspconfig').gdscript.setup(capabilities)
 
@@ -1062,6 +1068,14 @@ require('lazy').setup({
           -- ALFIE! YOU HAVE SET BOTH TAB AND ENTER TO COMPLETE HERE, cycle with up and down!
           ['<CR>'] = cmp.mapping.confirm { select = true },
           ['<Tab>'] = cmp.mapping.confirm { select = true },
+          -- ['<CR>'] = cmp.mapping.confirm { select = false },
+          -- ['<Tab>'] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { 'i', 's' }),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -1338,6 +1352,25 @@ require('lazy').setup({
   {
     'github/copilot.vim',
   },
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    event = 'VeryLazy',
+    config = function()
+      require('bufferline').setup {
+        options = {
+          mode = 'buffers', -- or "tabs"
+          diagnostics = 'nvim_lsp',
+          show_buffer_close_icons = true,
+          show_close_icon = false,
+          separator_style = 'thin',
+          always_show_bufferline = true,
+        },
+      }
+    end,
+  },
+
   { 'habamax/vim-godot', event = 'VimEnter' },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the

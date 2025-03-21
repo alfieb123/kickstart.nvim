@@ -739,6 +739,15 @@ require('lazy').setup({
             }
           end, '[T]oggle [T]heme')
 
+          -- Yank to system clipboard - alfie dont put these in map as map is not global
+          vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
+          vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank selection to system clipboard' })
+          vim.keymap.set('n', '<leader>yy', '"+yy', { desc = 'Yank line to system clipboard' })
+
+          -- Paste from system clipboard
+          vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
+          vim.keymap.set('v', '<leader>p', '"+p', { desc = 'Paste over selection from clipboard' })
+
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
@@ -1218,6 +1227,32 @@ require('lazy').setup({
 
   -- Nord (Cool and calming arctic feel)
   { 'shaunsingh/nord.nvim', priority = 1000 },
+
+  -- Everforest (warm, forest-inspired, soft & readable)
+  { 'sainnhe/everforest', priority = 1000 },
+
+  -- Monokai Pro (classic, vibrant monokai with beautiful variants)
+  { 'loctvl842/monokai-pro.nvim', priority = 1000 },
+
+  -- Kanagawa Community Fork (more maintained with updates)
+  { 'projekt0n/github-nvim-theme', priority = 1000 },
+
+  -- Material (based on Material Design palette, lots of styles)
+  { 'marko-cerovac/material.nvim', priority = 1000 },
+
+  -- Oxocarbon (Carbon-inspired, sleek IBM-based palette)
+  { 'nyoom-engineering/oxocarbon.nvim', priority = 1000 },
+
+  -- Palenight (popular purple-toned theme, clean UI)
+  { 'drewtempelmeyer/palenight.vim', priority = 1000 },
+
+  -- Edge (dark and light minimal theme by the author of nightfox)
+  { 'sainnhe/edge', priority = 1000 },
+
+  -- TokyoNight Community Fork (extra variants and tweaks)
+  { 'olimorris/onedarkpro.nvim', priority = 1000 },
+
+  --- ALFIE COLORSCHEME ENDS HERE ------------------------
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

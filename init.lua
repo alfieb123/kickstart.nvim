@@ -231,7 +231,7 @@ vim.keymap.set('n', '<leader>ff', function()
   end
 end, { desc = 'Toggle fold recursively' })
 
-vim.keymap.set('n', '<leader>bad', ':%bd|e#|bd#<CR>', { desc = 'Close all buffers except current' })
+vim.keymap.set('n', '<leader>bod', ':%bd|e#|bd#<CR>', { desc = '[B]uffer [O]ther [D]elete' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -416,42 +416,42 @@ require('lazy').setup({
       -- log_level = 'debug',
     },
   },
-{
-  'folke/flash.nvim',
-  event = 'VeryLazy',
-  opts = {},
-  keys = {
-    {
-      's',
-      mode = { 'n', 'x', 'o' },
-      function()
-        require('flash').jump({
-          search = {
-            -- allow two characters for wider jump range
-            max_length = 2,
-          },
-          label = {
-            -- show labels after match is narrowed (fewer distractions early)
-            after = true,
-            before = false,
-          },
-          jump = {
-            autojump = true, -- jump immediately if only one match
-          },
-        })
-      end,
-      desc = 'Flash Jump (2-char)',
-    },
-    {
-      'S',
-      mode = { 'n', 'x', 'o' },
-      function()
-        require('flash').treesitter()
-      end,
-      desc = 'Flash Treesitter Jump',
+  {
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    keys = {
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump {
+            search = {
+              -- allow two characters for wider jump range
+              max_length = 2,
+            },
+            label = {
+              -- show labels after match is narrowed (fewer distractions early)
+              after = true,
+              before = false,
+            },
+            jump = {
+              autojump = true, -- jump immediately if only one match
+            },
+          }
+        end,
+        desc = 'Flash Jump (2-char)',
+      },
+      {
+        'S',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').treesitter()
+        end,
+        desc = 'Flash Treesitter Jump',
+      },
     },
   },
-},
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -771,6 +771,16 @@ require('lazy').setup({
           vim.keymap.set('n', '<F6>', ':bprevious<CR>', { desc = 'Previous buffer' })
           vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
 
+          -- coiplot stuff
+          vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
+          vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[C]opilot [D]isable' })
+
+          -- turn all the tabs to spaces in the current buffer
+          vim.keymap.set('n', '<leader>cs', function()
+            vim.cmd 'set expandtab'
+            vim.cmd 'retab'
+          end, { desc = '[C]ode tabs to [S]paces' })
+
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
@@ -1083,8 +1093,9 @@ require('lazy').setup({
           -- ['<Tab>'] = cmp.mapping.select_next_item(),
           -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
           -- ALFIE! YOU HAVE SET BOTH TAB AND ENTER TO COMPLETE HERE, cycle with up and down!
-          ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          -- NOTE: you have set select to false! this means that unless you have selected something from the completion list it wont populate it if you press tab or enter
+          ['<CR>'] = cmp.mapping.confirm { select = false },
+          ['<Tab>'] = cmp.mapping.confirm { select = false },
           -- ['<CR>'] = cmp.mapping.confirm { select = false },
           -- ['<Tab>'] = cmp.mapping(function(fallback)
           --   if cmp.visible() then
@@ -1131,6 +1142,7 @@ require('lazy').setup({
           { name = 'luasnip' },
           { name = 'path' },
           -- { name = 'nvim_lsp_signature_help' }, -- ALFIE! YOU HAVE DISABLED THIS AS IT COMPLETES FUNCTION SIGNATUREES!
+          { name = 'nvim_lsp_signature_help' },
         },
       }
     end,

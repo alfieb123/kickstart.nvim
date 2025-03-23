@@ -417,41 +417,48 @@ require('lazy').setup({
     },
   },
   {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-      {
-        's',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').jump {
-            search = {
-              -- allow two characters for wider jump range
-              max_length = 2,
-            },
-            label = {
-              -- show labels after match is narrowed (fewer distractions early)
-              after = true,
-              before = false,
-            },
-            jump = {
-              autojump = true, -- jump immediately if only one match
-            },
-          }
-        end,
-        desc = 'Flash Jump (2-char)',
-      },
-      {
-        'S',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').treesitter()
-        end,
-        desc = 'Flash Treesitter Jump',
-      },
-    },
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').add_default_mappings()
+    end,
   },
+
+  -- {
+  --   'folke/flash.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       's',
+  --       mode = { 'n', 'x', 'o' },
+  --       function()
+  --         require('flash').jump {
+  --           search = {
+  --             -- allow two characters for wider jump range
+  --             max_length = 4,
+  --           },
+  --           label = {
+  --             -- show labels after match is narrowed (fewer distractions early)
+  --             after = true,
+  --             before = true,
+  --           },
+  --           jump = {
+  --             autojump = false, -- jump immediately if only one match
+  --           },
+  --         }
+  --       end,
+  --       desc = 'Flash Jump',
+  --     },
+  --     {
+  --       'S',
+  --       mode = { 'n', 'x', 'o' },
+  --       function()
+  --         require('flash').treesitter()
+  --       end,
+  --       desc = 'Flash Treesitter Jump',
+  --     },
+  --   },
+  -- },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -774,6 +781,12 @@ require('lazy').setup({
           -- coiplot stuff
           vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
           vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[C]opilot [D]isable' })
+
+          -- leap.nvim stuff
+          vim.keymap.set('n', 's', '<Plug>(leap-anywhere)')
+          vim.keymap.set('x', 's', '<Plug>(leap)')
+          vim.keymap.set('o', 's', '<Plug>(leap-forward)')
+          vim.keymap.set('o', 'S', '<Plug>(leap-backward)')
 
           -- turn all the tabs to spaces in the current buffer
           vim.keymap.set('n', '<leader>cs', function()

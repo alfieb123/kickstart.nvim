@@ -224,10 +224,16 @@ end, { desc = 'Fold all functions' })
 vim.keymap.set('n', '<leader>fu', 'zR', { desc = 'Unfold all functions' })
 -- vim.keymap.set('n', '<leader>kl', 'zO', { desc = 'Expand current fold recursively' })
 vim.keymap.set('n', '<leader>ff', function()
+  local fold_lvl = vim.fn.foldlevel '.'
+  if fold_lvl <= 0 then
+    vim.notify('No fold exists at this line', vim.log.levels.WARN, { title = 'Folds' })
+    return
+  end
+
   if vim.fn.foldclosed '.' ~= -1 then
-    vim.cmd 'normal! zO' -- Recursively open fold if it is closed
+    vim.cmd 'normal! zO' -- Open fold recursively
   else
-    vim.cmd 'normal! zc' -- Close fold if it is open
+    vim.cmd 'normal! zc' -- Close fold
   end
 end, { desc = 'Toggle fold recursively' })
 

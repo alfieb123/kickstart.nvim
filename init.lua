@@ -1411,10 +1411,11 @@ require('lazy').setup({
         options = {
           mode = 'buffers', -- or "tabs"
           diagnostics = 'nvim_lsp',
-          show_buffer_close_icons = true,
+          show_buffer_close_icons = false,
           show_close_icon = false,
           separator_style = 'thin',
           always_show_bufferline = true,
+          show_buffer_icons = false,
         },
       }
     end,

@@ -916,6 +916,13 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       -- ALFIE SETTING UP GDSCRIPT STUFF
       require('lspconfig').gdscript.setup(capabilities)
+      -- local lspconfig = require 'lspconfig'
+      --
+      -- lspconfig.gdscript.setup {
+      --   cmd = { 'nc', '127.0.0.1', '6005' },
+      --   filetypes = { 'gd', 'gdscript' },
+      --   root_dir = lspconfig.util.root_pattern('project.godot', '.git'),
+      -- }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -1230,7 +1237,7 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       require('onedark').setup {
         -- Main options --
-        style = 'warmer', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+        style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
         transparent = false, -- Show/hide background
         term_colors = true, -- Change terminal color as per the selected theme style
         ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
@@ -1312,8 +1319,9 @@ require('lazy').setup({
   -- Edge (dark and light minimal theme by the author of nightfox)
   { 'sainnhe/edge', priority = 1000 },
 
-  -- TokyoNight Community Fork (extra variants and tweaks)
-  { 'olimorris/onedarkpro.nvim', priority = 1000 },
+  { 'yasukotelin/shirotelin', priority = 1000 },
+  -- -- TokyoNight Community Fork (extra variants and tweaks)
+  -- { 'olimorris/onedarkpro.nvim', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
 

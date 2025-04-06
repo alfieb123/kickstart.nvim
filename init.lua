@@ -262,14 +262,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 -- automatically fold all gd files - NOTE: this will not work on restored sessions! just newly opened files
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = '*.gd',
-  callback = function()
-    vim.opt.foldmethod = 'expr'
-    vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-    vim.cmd 'normal! zM' -- Close all folds
-  end,
-})
+-- NOTE: alfie you have turned this off for now...it was getting on your tits
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+--   pattern = '*.gd',
+--   callback = function()
+--     vim.opt.foldmethod = 'expr'
+--     vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+--     vim.cmd 'normal! zM' -- Close all folds
+--   end,
+-- })
 -- load the saved theme from the file
 vim.api.nvim_create_autocmd('User', {
   pattern = 'VeryLazy',

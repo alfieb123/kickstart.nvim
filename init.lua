@@ -261,6 +261,17 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.wrap = false
   end,
 })
+-- attempthing to force gdscript to always use spaces instead of tabs
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gdscript',
+  callback = function()
+    vim.opt_local.expandtab = true
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
 -- automatically fold all gd files - NOTE: this will not work on restored sessions! just newly opened files
 -- NOTE: alfie you have turned this off for now...it was getting on your tits
 -- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
@@ -427,6 +438,7 @@ require('lazy').setup({
     'ggandor/leap.nvim',
     config = function()
       require('leap').add_default_mappings()
+      vim.keymap.set('x', 'x', 'd', { noremap = true, desc = 'Delete in visual mode' }) -- leap remaps x.. :(, put it back
     end,
   },
 

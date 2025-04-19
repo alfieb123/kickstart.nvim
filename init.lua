@@ -166,6 +166,8 @@ vim.opt.shiftwidth = 4 -- how many spaces to use for autoindent
 vim.opt.softtabstop = 4 -- how many spaces a <Tab> feels like
 vim.opt.expandtab = true -- use spaces instead of tabs
 
+vim.opt.laststatus = 3 -- this shows one status line, so  we can see things like horizontal splits
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 

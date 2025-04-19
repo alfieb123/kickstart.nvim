@@ -741,6 +741,19 @@ require('lazy').setup({
           --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
+          -- Lspsaga enhancements
+          vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { buffer = event.buf, desc = 'LSP: Hover Doc' })
+          vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { buffer = event.buf, desc = 'LSP: Peek Definition' })
+          vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { buffer = event.buf, desc = 'LSP: Rename Symbol' })
+          vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { buffer = event.buf, desc = 'LSP: Code Action' })
+          vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', { buffer = event.buf, desc = 'LSP: Line Diagnostics' })
+          vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { buffer = event.buf, desc = 'LSP: Prev Diagnostic' })
+          vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', { buffer = event.buf, desc = 'LSP: Next Diagnostic' })
+          vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { buffer = event.buf, desc = 'LSP: Outline Symbols' })
+          vim.keymap.set('n', '<leader>f', '<cmd>Lspsaga finder<CR>', { buffer = event.buf, desc = 'LSP: Finder Panel' })
+
+          -- vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { desc = 'Peek function definition' })
+
           -- Find references for the word under your cursor.
           -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gr', function()
@@ -795,7 +808,19 @@ require('lazy').setup({
           -- buffer stuff
           vim.keymap.set('n', '<F5>', ':bnext<CR>', { desc = 'Next buffer' })
           vim.keymap.set('n', '<F6>', ':bprevious<CR>', { desc = 'Previous buffer' })
-          vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
+          -- vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Close buffer' })
+          vim.keymap.set('n', '<leader>bd', function() -- this upgrade means that we will keep splits when closing buffers
+            local current_buf = vim.api.nvim_get_current_buf()
+            local buffers = vim.fn.getbufinfo { buflisted = 1 }
+
+            if #buffers > 1 then
+              vim.cmd 'bnext'
+              vim.cmd('bdelete ' .. current_buf)
+            else
+              vim.cmd 'enew' -- create a new empty buffer
+              vim.cmd('bdelete ' .. current_buf)
+            end
+          end, { desc = 'Smart close buffer without closing window' })
 
           -- coiplot stuff
           vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
@@ -1335,8 +1360,40 @@ require('lazy').setup({
   { 'yasukotelin/shirotelin', priority = 1000 },
   -- -- TokyoNight Community Fork (extra variants and tweaks)
   -- { 'olimorris/onedarkpro.nvim', priority = 1000 },
+  --
+  { 'AlexvZyl/nordic.nvim', priority = 1000 },
+
+  { 'datsfilipe/vesper.nvim', priority = 1000 },
+
+  { 'scottmckendry/cyberdream.nvim', priority = 1000 },
+
+  { 'ribru17/bamboo.nvim', priority = 1000 },
+
+  { 'savq/melange-nvim', priority = 1000 },
+  { 'NTBBloodbath/doom-one.nvim', priority = 1000 },
+  { 'xero/miasma.nvim', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
+  ---
+  {
+    'nvimdev/lspsaga.nvim',
+    event = 'LspAttach',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('lspsaga').setup {
+        outline = {
+          keys = {
+            jump = '<CR>',
+            quit = 'q',
+            toggle_or_jump = 'o',
+          },
+        },
+      }
+    end,
+  },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

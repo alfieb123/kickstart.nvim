@@ -168,6 +168,8 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 
 vim.opt.laststatus = 3 -- this shows one status line, so  we can see things like horizontal splits
 
+vim.opt.foldmethod = 'manual' -- set the default fold method to manual, this will not use treesitter, but we do in the folding keymaps
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 

@@ -1378,6 +1378,10 @@ require('lazy').setup({
   { 'savq/melange-nvim', priority = 1000 },
   { 'NTBBloodbath/doom-one.nvim', priority = 1000 },
   { 'xero/miasma.nvim', priority = 1000 },
+  { 'lalitmee/cobalt2.nvim', priority = 1000 },
+  { 'kdheepak/monochrome.nvim', priority = 1000 },
+  { 'idr4n/github-monochrome.nvim', priority = 1000 },
+  { 'slugbyte/lackluster.nvim', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---

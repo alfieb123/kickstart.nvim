@@ -1411,6 +1411,62 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
+  {
+    'folke/twilight.nvim',
+    opts = {
+      {
+        dimming = {
+          alpha = 0.25, -- amount of dimming
+          -- we try to get the foreground from the highlight groups or fallback color
+          color = { 'Normal', '#ffffff' },
+          term_bg = '#000000', -- if guibg=NONE, this will be used to calculate text color
+          inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+        },
+        context = 16, -- amount of lines we will try to show around the current line
+        treesitter = true, -- use treesitter when available for the filetype
+        -- treesitter is used to automatically expand the visible text,
+        -- but you can further control the types of nodes that should always be fully expanded
+        expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+          'function',
+          'method',
+          'table',
+          'if_statement',
+        },
+        exclude = {}, -- exclude these filetypes
+      },
+    },
+    keys = {
+      { '<leader>tw', '<cmd>Twilight<CR>', desc = 'Toggle Twilight' },
+    },
+  },
+
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      window = {
+        width = 150, -- or e.g. .85 for 85% of screen width
+        options = {
+          number = false,
+          relativenumber = false,
+          signcolumn = 'no',
+        },
+      },
+      plugins = {
+        options = {
+          enabled = true,
+          ruler = false,
+          showcmd = false,
+          laststatus = 0,
+        },
+        twilight = { enabled = true }, -- if you also use Twilight
+        gitsigns = { enabled = false },
+      },
+    },
+    keys = {
+      { '<leader>z', '<cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' },
+    },
+  },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()

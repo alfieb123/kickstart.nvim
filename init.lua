@@ -1273,6 +1273,10 @@ require('lazy').setup({
     end,
   },
   {
+    'slugbyte/lackluster.nvim',
+    priority = 1000,
+  },
+  {
     'navarasu/onedark.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
@@ -1381,7 +1385,6 @@ require('lazy').setup({
   { 'lalitmee/cobalt2.nvim', priority = 1000 },
   { 'kdheepak/monochrome.nvim', priority = 1000 },
   { 'idr4n/github-monochrome.nvim', priority = 1000 },
-  { 'slugbyte/lackluster.nvim', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---

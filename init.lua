@@ -1400,6 +1400,8 @@ require('lazy').setup({
           win_width = 80,
           close_after_jump = true,
           layout = 'float',
+          max_height = 0.7,
+          left_width = 0.5,
           keys = {
             jump = '<CR>',
             quit = 'q',

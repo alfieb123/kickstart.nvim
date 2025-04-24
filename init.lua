@@ -1398,6 +1398,8 @@ require('lazy').setup({
       require('lspsaga').setup {
         outline = {
           win_width = 80,
+          close_after_jump = true,
+          layout = 'float',
           keys = {
             jump = '<CR>',
             quit = 'q',

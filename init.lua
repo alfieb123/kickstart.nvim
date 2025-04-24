@@ -838,6 +838,9 @@ require('lazy').setup({
             vim.cmd 'retab'
           end, { desc = '[C]ode tabs to [S]paces' })
 
+          -- make going to the center of the document less pinky heavy
+          vim.keymap.set('n', '<leader>cc', 'zz', { desc = '[C]enter [C]enter!' })
+
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.

@@ -210,8 +210,8 @@ vim.keymap.set('n', '<leader>QQ', function()
   vim.cmd 'SessionSave' -- Run :SessionSave (user-defined command)
   vim.cmd 'qa' -- Quit all
 end, { desc = 'Save all, save session, quit' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
 vim.keymap.set('n', ']p', function()
   vim.cmd 'normal! ]m'
 end, { desc = 'Go to next function' })
@@ -856,11 +856,11 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame') <- done in lsp saga
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' }) <- done in lsp saga
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -1397,6 +1397,7 @@ require('lazy').setup({
     config = function()
       require('lspsaga').setup {
         outline = {
+          win_width = 80,
           keys = {
             jump = '<CR>',
             quit = 'q',

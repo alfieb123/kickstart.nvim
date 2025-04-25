@@ -210,8 +210,8 @@ vim.keymap.set('n', '<leader>QQ', function()
   vim.cmd 'SessionSave' -- Run :SessionSave (user-defined command)
   vim.cmd 'qa' -- Quit all
 end, { desc = 'Save all, save session, quit' })
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
 vim.keymap.set('n', ']p', function()
   vim.cmd 'normal! ]m'
 end, { desc = 'Go to next function' })
@@ -740,37 +740,86 @@ require('lazy').setup({
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
           -- Lspsaga enhancements
-          vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { buffer = event.buf, desc = 'LSP: Hover Doc' })
-          vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { buffer = event.buf, desc = 'LSP: Peek Definition' })
-          vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { buffer = event.buf, desc = 'LSP: Rename Symbol' })
-          vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { buffer = event.buf, desc = 'LSP: Code Action' })
-          vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', { buffer = event.buf, desc = 'LSP: Line Diagnostics' })
-          vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { buffer = event.buf, desc = 'LSP: Prev Diagnostic' })
-          vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', { buffer = event.buf, desc = 'LSP: Next Diagnostic' })
-          vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { buffer = event.buf, desc = 'LSP: Outline Symbols' })
-          vim.keymap.set('n', '<leader>f', '<cmd>Lspsaga finder<CR>', { buffer = event.buf, desc = 'LSP: Finder Panel' })
+          -- vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { buffer = event.buf, desc = 'LSP: Hover Doc' })
+          -- vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { buffer = event.buf, desc = 'LSP: Peek Definition' })
+          -- vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { buffer = event.buf, desc = 'LSP: Rename Symbol' })
+          -- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { buffer = event.buf, desc = 'LSP: Code Action' })
+          -- vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', { buffer = event.buf, desc = 'LSP: Line Diagnostics' })
+          -- vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { buffer = event.buf, desc = 'LSP: Prev Diagnostic' })
+          -- vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', { buffer = event.buf, desc = 'LSP: Next Diagnostic' })
+          -- vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { buffer = event.buf, desc = 'LSP: Outline Symbols' })
+          -- vim.keymap.set('n', '<leader>f', '<cmd>Lspsaga finder<CR>', { buffer = event.buf, desc = 'LSP: Finder Panel' })
 
           -- vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { desc = 'Peek function definition' })
 
           -- Find references for the word under your cursor.
           -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- map('gr', function()
+          --   require('telescope.builtin').lsp_references {
+          --     show_line = false, -- this is the line that stops the results showing both the filepath and the line its used.. we can look at the preview window for that!
+          --     path_display = { 'smart' },
+          --     layout_strategy = 'vertical',
+          --     layout_config = {
+          --       width = 0.9,
+          --       height = 0.9,
+          --       prompt_position = 'top',
+          --       mirror = true,
+          --     },
+          --   }
+          -- end, '[G]oto [R]eferences')
+          -- Jump to the definition of the word under your cursor.
+          --  This is where a variable was first declared, or where a function is defined, etc.
+          --  To jump back, press <C-t>.
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('dp', function()
+            require('telescope.builtin').lsp_definitions {
+              jump_type = 'never',
+              layout_strategy = 'vertical',
+              show_line = false,
+              layout_config = {
+                -- bottom_pane = {
+                --   height = 5,
+                --   preview_cutoff = 5,
+                --   prompt_position = 'top',
+                -- },
+                -- center = {
+                --   height = 0.1,
+                --   preview_cutoff = 5,
+                --   prompt_position = 'top',
+                --   width = 0.5,
+                -- },
+                -- cursor = {
+                --   height = 0.9,
+                --   preview_cutoff = 40,
+                --   width = 0.8,
+                -- },
+                -- horizontal = {
+                --   height = 0.9,
+                --   preview_cutoff = 120,
+                --   prompt_position = 'bottom',
+                --   width = 0.8,
+                -- },
+                vertical = {
+                  height = 0.5,
+                  preview_cutoff = 40,
+                  prompt_position = 'bottom',
+                  width = 0.5,
+                  preview_height = 0.99,
+                },
+              },
+              prompt_title = false,
+            }
+          end, '[D]efinition [P]eek ')
+
           map('gr', function()
             require('telescope.builtin').lsp_references {
+              path_display = { 'smart' }, -- trims the paths if needed to show filename
+              include_declaration = true,
+              include_current_line = false,
+              fname_width = 100, -- so we can see the damned thing
               show_line = false, -- this is the line that stops the results showing both the filepath and the line its used.. we can look at the preview window for that!
-              path_display = { 'smart' },
-              layout_strategy = 'vertical',
-              layout_config = {
-                width = 0.9,
-                height = 0.9,
-                prompt_position = 'top',
-                mirror = true,
-              },
+              trim_text = false,
             }
           end, '[G]oto [R]eferences')
 
@@ -848,7 +897,15 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>ds', function()
+            require('telescope.builtin').lsp_document_symbols {
+              fname_width = 0, -- wider filename column, this doesnt apply to document symbols
+              symbol_width = 70, -- optional: wider symbol name this is the fat symbol
+              symbol_type_width = 12, -- optional: wider symbol type column this is the type the symbol is
+              show_line = false, -- optional: show code line contents, we dont need to show this as we have a preview window
+              symbols = { 'Function', 'Method' }, -- just show functions/methods... not variables etc. if you want that, maybe make another keymap
+            }
+          end, '[D]ocument [S]ymbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
@@ -856,11 +913,11 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame') <- done in lsp saga
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' }) <- done in lsp saga
+          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -1387,30 +1444,30 @@ require('lazy').setup({
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---
-  {
-    'nvimdev/lspsaga.nvim',
-    event = 'LspAttach',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('lspsaga').setup {
-        outline = {
-          win_width = 80,
-          close_after_jump = true,
-          layout = 'float',
-          max_height = 0.7,
-          left_width = 0.5,
-          keys = {
-            jump = '<CR>',
-            quit = 'q',
-            toggle_or_jump = 'o',
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   'nvimdev/lspsaga.nvim',
+  --   event = 'LspAttach',
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter',
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require('lspsaga').setup {
+  --       outline = {
+  --         win_width = 80,
+  --         close_after_jump = true,
+  --         layout = 'float',
+  --         max_height = 0.7,
+  --         left_width = 0.5,
+  --         keys = {
+  --           jump = '<CR>',
+  --           quit = 'q',
+  --           toggle_or_jump = 'o',
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

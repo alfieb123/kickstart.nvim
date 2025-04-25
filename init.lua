@@ -772,7 +772,7 @@ require('lazy').setup({
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('dp', function()
+          map('pd', function()
             require('telescope.builtin').lsp_definitions {
               jump_type = 'never',
               layout_strategy = 'vertical',
@@ -800,7 +800,7 @@ require('lazy').setup({
                 --   prompt_position = 'bottom',
                 --   width = 0.8,
                 -- },
-                vertical = {
+                vertical = { -- as our strategy is set to vertical, this is the config that matters! left the others here for reference for other stuff
                   height = 0.5,
                   preview_cutoff = 40,
                   prompt_position = 'bottom',
@@ -810,7 +810,7 @@ require('lazy').setup({
               },
               prompt_title = false,
             }
-          end, '[D]efinition [P]eek ')
+          end, '[P]eek [D]efinition ')
 
           map('gr', function()
             require('telescope.builtin').lsp_references {

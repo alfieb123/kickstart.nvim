@@ -173,6 +173,17 @@ vim.opt.foldmethod = 'manual' -- set the default fold method to manual, this wil
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+vim.keymap.set('n', '<leader>ct', function()
+  local wrap = vim.wo.wrap
+  vim.wo.wrap = not wrap
+  vim.wo.spell = not wrap
+  if wrap then
+    vim.notify('Wrap and Spellcheck disabled', vim.log.levels.INFO)
+  else
+    vim.notify('Wrap and Spellcheck enabled', vim.log.levels.INFO)
+  end
+end, { desc = '[C]ode: Toggle wrap + spellcheck' })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')

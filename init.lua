@@ -1457,6 +1457,10 @@ require('lazy').setup({
   { 'lalitmee/cobalt2.nvim', priority = 1000 },
   { 'kdheepak/monochrome.nvim', priority = 1000 },
   { 'idr4n/github-monochrome.nvim', priority = 1000 },
+  { 'iagorrr/noctis-high-contrast.nvim', priority = 1000 },
+  { 'gantoreno/nvim-gabriel', priority = 1000 },
+  { 'kemiller/vim-ir_black', priority = 1000 },
+  { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---

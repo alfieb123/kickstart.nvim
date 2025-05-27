@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -122,7 +122,7 @@ end)
 vim.opt.breakindent = true
 
 -- Save undo history
-vim.opt.undofile = true
+vim.opt.undofile = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -175,14 +175,19 @@ vim.opt.foldmethod = 'manual' -- set the default fold method to manual, this wil
 
 vim.keymap.set('n', '<leader>ct', function()
   local wrap = vim.wo.wrap
-  vim.wo.wrap = not wrap
-  vim.wo.spell = not wrap
   if wrap then
-    vim.notify('Wrap and Spellcheck disabled', vim.log.levels.INFO)
+    vim.wo.wrap = false
+    vim.wo.linebreak = false
+    vim.wo.spell = false
+    vim.notify('Wrap + spellcheck disabled', vim.log.levels.INFO)
   else
-    vim.notify('Wrap and Spellcheck enabled', vim.log.levels.INFO)
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.wo.breakindent = true
+    vim.wo.spell = true
+    vim.notify('Word-aware wrap + spellcheck enabled', vim.log.levels.INFO)
   end
-end, { desc = '[C]ode: Toggle wrap + spellcheck' })
+end, { desc = '[C]ode: Toggle word-wrap + spellcheck' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

@@ -1356,8 +1356,8 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       require('onedark').setup {
         -- Main options --
-        style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-        transparent = false, -- Show/hide background
+        style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+        transparent = true, -- Show/hide background ALFIE! doing this so we can have a black background
         term_colors = true, -- Change terminal color as per the selected theme style
         ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
         cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
@@ -1371,7 +1371,7 @@ require('lazy').setup({
         -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
         code_style = {
           comments = 'italic',
-          keywords = 'none',
+          keywords = 'bold',
           functions = 'none',
           strings = 'none',
           variables = 'none',
@@ -1462,6 +1462,7 @@ require('lazy').setup({
   { 'gantoreno/nvim-gabriel', priority = 1000 },
   { 'kemiller/vim-ir_black', priority = 1000 },
   { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
+  { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---
@@ -1528,9 +1529,9 @@ require('lazy').setup({
       window = {
         width = 150, -- or e.g. .85 for 85% of screen width
         options = {
-          number = false,
-          relativenumber = false,
-          signcolumn = 'no',
+          number = true,
+          relativenumber = true,
+          signcolumn = 'yes',
         },
       },
       plugins = {

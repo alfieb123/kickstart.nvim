@@ -1549,7 +1549,7 @@ require('lazy').setup({
         -- - listen_on unix:/tmp/kitty
         kitty = {
           enabled = true,
-          font = '+4', -- font size increment
+          font = '+2', -- font size increment
         },
       },
     },

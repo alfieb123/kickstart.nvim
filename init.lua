@@ -349,7 +349,16 @@ vim.opt.rtp:prepend(lazypath)
 local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
 if gdproject then
   io.close(gdproject)
-  vim.fn.serverstart './godothost'
+
+  local servername = './godothost'
+
+  -- Try to start the server, but catch the error if it's already taken
+  local ok, err = pcall(vim.fn.serverstart, servername)
+  if not ok then
+    vim.schedule(function()
+      vim.notify('Godot LSP server not started: ' .. err, vim.log.levels.WARN, { title = 'Godot Server' })
+    end)
+  end
 end
 
 -- [[ Configure and install plugins ]]
@@ -1456,6 +1465,7 @@ require('lazy').setup({
   { 'NTBBloodbath/doom-one.nvim', priority = 1000 },
   { 'xero/miasma.nvim', priority = 1000 },
   { 'lalitmee/cobalt2.nvim', priority = 1000 },
+  { 'tjdevries/colorbuddy.nvim', priority = 1000 },
   { 'kdheepak/monochrome.nvim', priority = 1000 },
   { 'idr4n/github-monochrome.nvim', priority = 1000 },
   { 'iagorrr/noctis-high-contrast.nvim', priority = 1000 },

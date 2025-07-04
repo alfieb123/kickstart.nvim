@@ -19,19 +19,6 @@ Color.new('highlight_bg', '#c9f0dc')
 Color.new('highlight_fg', '#193225')
 Color.new('soft_white', '#f2f6ff')
 Color.new('alert_red', '#ff3366') -- Or any red you like
-Color.new('todo_error', '#c72626') -- Tomato red
-Color.new('todo_warning', '#f4a623') -- Burnt yellow
-Color.new('todo_info', '#317ae0') -- Cerulean blue
-Color.new('todo_hint', '#179d5e') -- Bold leaf green
-Color.new('todo_default', '#4cbb17') -- Vivid grass green
-Color.new('todo_test', '#ff00ff')
-
--- for todos
-Group.new('DiagnosticError', c.todo_error, nil, s.bold)
-Group.new('DiagnosticWarn', c.todo_warning, nil)
-Group.new('DiagnosticInfo', c.todo_info, nil)
-Group.new('DiagnosticHint', c.todo_hint, nil)
-Group.new('Identifier', c.todo_default, nil)
 
 -- Folded stuff
 Group.new('Folded', c.ink, c.soft_shadow)

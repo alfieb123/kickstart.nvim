@@ -19,6 +19,10 @@ Color.new('highlight_bg', '#c9f0dc')
 Color.new('highlight_fg', '#193225')
 Color.new('soft_white', '#f2f6ff')
 
+-- Folded stuff
+Group.new('Folded', c.ink, c.soft_shadow)
+Group.new('FoldColumn', c.ink, c.soft_shadow)
+
 -- Normal text and UI
 Group.new('Normal', c.ink, c.background)
 Group.new('CursorLine', nil, c.soft_shadow)

@@ -24,6 +24,10 @@ Color.new('soft_white', '#f2f6ff')
 -- Normal background & fallback
 Group.new('Normal', c.ink, c.background)
 
+-- Folded stuff
+Group.new('Folded', c.ink, c.soft_shadow)
+Group.new('FoldColumn', c.ink, c.soft_shadow)
+
 -- Cursor & line markers
 Group.new('CursorLine', nil, c.soft_shadow)
 Group.new('CursorLineNr', c.indigo, c.soft_shadow, s.bold)

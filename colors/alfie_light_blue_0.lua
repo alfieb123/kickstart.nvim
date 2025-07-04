@@ -21,6 +21,19 @@ Color.new('highlight_bg', '#aacdee')
 Color.new('highlight_fg', '#1a2633')
 Color.new('soft_white', '#f2f6ff')
 Color.new('alert_red', '#ff3366') -- Or any red you like
+Color.new('todo_error', '#d62246') -- Crimson red
+Color.new('todo_warning', '#e67817') -- Bold amber
+Color.new('todo_info', '#375be3') -- Vivid royal blue
+Color.new('todo_hint', '#14996d') -- Deep jade green
+Color.new('todo_default', '#7c3aed') -- Bright violet
+Color.new('todo_test', '#ff00ff') -- Magenta (for visibility/testing)
+
+-- for todos
+Group.new('DiagnosticError', c.todo_error, nil, s.bold)
+Group.new('DiagnosticWarn', c.todo_warning, nil)
+Group.new('DiagnosticInfo', c.todo_info, nil)
+Group.new('DiagnosticHint', c.todo_hint, nil)
+Group.new('Identifier', c.todo_default, nil)
 
 -- Normal background & fallback
 Group.new('Normal', c.ink, c.background)

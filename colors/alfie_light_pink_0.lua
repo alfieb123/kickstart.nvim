@@ -19,6 +19,19 @@ Color.new('highlight_bg', '#f4d4e6')
 Color.new('highlight_fg', '#311c25')
 Color.new('soft_white', '#f2f6ff')
 Color.new('alert_red', '#ff3366') -- Or any red you like
+Color.new('todo_error', '#d7263d') -- Warm rose red
+Color.new('todo_warning', '#ff9f1c') -- Golden tangerine
+Color.new('todo_info', '#6957e0') -- Orchid blue
+Color.new('todo_hint', '#3eb489') -- Minty turquoise
+Color.new('todo_default', '#a84dac') -- Fuchsia-violet
+Color.new('todo_test', '#ff00ff')
+
+-- for todos
+Group.new('DiagnosticError', c.todo_error, nil, s.bold)
+Group.new('DiagnosticWarn', c.todo_warning, nil)
+Group.new('DiagnosticInfo', c.todo_info, nil)
+Group.new('DiagnosticHint', c.todo_hint, nil)
+Group.new('Identifier', c.todo_default, nil)
 
 -- Folded stuff
 Group.new('Folded', c.ink, c.soft_shadow)

@@ -20,6 +20,7 @@ Color.new('shadow_purple', '#33254c') -- very dark purple-blue
 Color.new('highlight_bg', '#aacdee')
 Color.new('highlight_fg', '#1a2633')
 Color.new('soft_white', '#f2f6ff')
+Color.new('alert_red', '#ff3366') -- Or any red you like
 
 -- Normal background & fallback
 Group.new('Normal', c.ink, c.background)
@@ -40,7 +41,7 @@ Group.new('TabLineSel', c.indigo, c.soft_shadow, s.bold)
 Group.new('TabLineFill', c.soft_shadow, c.soft_shadow)
 Group.new('StatusLine', c.ink, c.soft_shadow)
 Group.new('VertSplit', c.soft_shadow, c.background)
-Group.new('WinSeparator', c.soft_shadow, c.background)
+Group.new('WinSeparator', c.alert_red, c.background, s.bold)
 Group.new('ColorColumn', nil, c.soft_shadow)
 
 -- LSP "word under cursor" highlights

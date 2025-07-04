@@ -18,6 +18,7 @@ Color.new('mint', '#629d6c') -- slightly bright highlight
 Color.new('highlight_bg', '#c9f0dc')
 Color.new('highlight_fg', '#193225')
 Color.new('soft_white', '#f2f6ff')
+Color.new('alert_red', '#ff3366') -- Or any red you like
 
 -- Folded stuff
 Group.new('Folded', c.ink, c.soft_shadow)
@@ -35,7 +36,7 @@ Group.new('TabLineSel', c.mint, c.soft_shadow, s.bold)
 Group.new('TabLineFill', c.soft_shadow, c.soft_shadow)
 Group.new('StatusLine', c.ink, c.soft_shadow)
 Group.new('VertSplit', c.soft_shadow, c.background)
-Group.new('WinSeparator', c.soft_shadow, c.background)
+Group.new('WinSeparator', c.alert_red, c.background, s.bold)
 Group.new('ColorColumn', nil, c.soft_shadow)
 
 Group.new('LspReferenceText', c.highlight_fg, c.highlight_bg)

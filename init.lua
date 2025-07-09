@@ -798,45 +798,26 @@ require('lazy').setup({
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+
           map('pd', function()
             require('telescope.builtin').lsp_definitions {
-              jump_type = 'never',
+              jump_type = 'never', -- stay in the current buffer
               layout_strategy = 'vertical',
-              show_line = false,
               layout_config = {
-                -- bottom_pane = {
-                --   height = 5,
-                --   preview_cutoff = 5,
-                --   prompt_position = 'top',
-                -- },
-                -- center = {
-                --   height = 0.1,
-                --   preview_cutoff = 5,
-                --   prompt_position = 'top',
-                --   width = 0.5,
-                -- },
-                -- cursor = {
-                --   height = 0.9,
-                --   preview_cutoff = 40,
-                --   width = 0.8,
-                -- },
-                -- horizontal = {
-                --   height = 0.9,
-                --   preview_cutoff = 120,
-                --   prompt_position = 'bottom',
-                --   width = 0.8,
-                -- },
-                vertical = { -- as our strategy is set to vertical, this is the config that matters! left the others here for reference for other stuff
+                vertical = {
                   height = 0.5,
-                  preview_cutoff = 40,
+                  preview_cutoff = 0, -- force preview no matter what
                   prompt_position = 'bottom',
                   width = 0.5,
                   preview_height = 0.99,
                 },
               },
+              previewer = true, -- force the preview window
+              fname_width = 60,
+              path_display = { 'truncate' },
               prompt_title = false,
             }
-          end, '[P]eek [D]efinition ')
+          end, '[P]eek [D]efinition')
 
           map('gr', function()
             require('telescope.builtin').lsp_references {
@@ -1298,66 +1279,39 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- vim.cmd.colorscheme 'tokyonight-night'
-      -- vim.cmd.colorscheme 'tokyonight-storm'
-      -- vim.cmd.colorscheme 'tokyonight-moon'
-    end,
-  },
-  {
-    'rebelot/kanagawa.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('kanagawa').setup {
-        compile = false, -- enable compiling the colorscheme
-        undercurl = true, -- enable undercurls
-        commentStyle = { italic = true },
-        functionStyle = {},
-        keywordStyle = { italic = true },
-        statementStyle = { bold = true },
-        typeStyle = {},
-        transparent = false, -- do not set background color
-        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-        terminalColors = true, -- define vim.g.terminal_color_{0,17}
-        colors = { -- add/modify theme and palette colors
-          palette = {},
-          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-        },
-        overrides = function(colors) -- add/modify highlights
-          return {}
-        end,
-        theme = 'wave', -- Load "wave" theme
-        background = { -- map the value of 'background' option to a theme
-          dark = 'wave', -- try "dragon" !
-          light = 'lotus',
-        },
-      }
-      -- vim.cmd.colorscheme 'kanagawa-wave'
-    end,
-  },
-  {
-    'slugbyte/lackluster.nvim',
-    priority = 1000,
-  },
+  --- COLOR THEMES! note we have most commented out but i leave them here so we can easily load them again
+  -- { 'slugbyte/lackluster.nvim', priority = 1000 },
+  -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  -- { 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
+  -- { 'ellisonleao/gruvbox.nvim', priority = 1000 },
+  -- { 'maxmx03/solarized.nvim', priority = 1000 },
+  -- { 'EdenEast/nightfox.nvim', priority = 1000 },
+  -- { 'Mofiqul/dracula.nvim', priority = 1000 },
+  -- { 'shaunsingh/nord.nvim', priority = 1000 },
+  -- { 'sainnhe/everforest', priority = 1000 },
+  -- { 'loctvl842/monokai-pro.nvim', priority = 1000 },
+  -- { 'projekt0n/github-nvim-theme', priority = 1000 },
+  -- { 'marko-cerovac/material.nvim', priority = 1000 },
+  -- { 'nyoom-engineering/oxocarbon.nvim', priority = 1000 },
+  -- { 'drewtempelmeyer/palenight.vim', priority = 1000 },
+  -- { 'sainnhe/edge', priority = 1000 },
+  -- { 'yasukotelin/shirotelin', priority = 1000 },
+  -- { 'AlexvZyl/nordic.nvim', priority = 1000 },
+  -- { 'datsfilipe/vesper.nvim', priority = 1000 },
+  -- { 'ribru17/bamboo.nvim', priority = 1000 },
+  -- { 'savq/melange-nvim', priority = 1000 },
+  -- { 'NTBBloodbath/doom-one.nvim', priority = 1000 },
+  -- { 'xero/miasma.nvim', priority = 1000 },
+  -- { 'lalitmee/cobalt2.nvim', priority = 1000 },
+  -- { 'kdheepak/monochrome.nvim', priority = 1000 },
+  -- { 'idr4n/github-monochrome.nvim', priority = 1000 },
+  -- { 'iagorrr/noctis-high-contrast.nvim', priority = 1000 },
+  -- { 'gantoreno/nvim-gabriel', priority = 1000 },
+  -- { 'kemiller/vim-ir_black', priority = 1000 },
+  -- { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
+  --
+  -- !!!!!!keeping colorbuddy as its what we use to make our custom themes, and also keeping these other few
+  { 'tjdevries/colorbuddy.nvim', priority = 1000 },
   {
     'navarasu/onedark.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -1407,72 +1361,6 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'onedark'
     end,
   },
-  -- Catppuccin (Soft, modern, pastel)
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
-
-  -- Rose Pine (Elegant and warm)
-  { 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
-
-  -- Gruvbox (Classic contrast, warm colours)
-  { 'ellisonleao/gruvbox.nvim', priority = 1000 },
-
-  -- Solarized (Light & dark with low contrast)
-  { 'maxmx03/solarized.nvim', priority = 1000 },
-
-  -- Nightfox (Includes nordfox, duskfox, etc.)
-  { 'EdenEast/nightfox.nvim', priority = 1000 },
-
-  -- Dracula (Popular, vibrant dark theme)
-  { 'Mofiqul/dracula.nvim', priority = 1000 },
-
-  -- Nord (Cool and calming arctic feel)
-  { 'shaunsingh/nord.nvim', priority = 1000 },
-
-  -- Everforest (warm, forest-inspired, soft & readable)
-  { 'sainnhe/everforest', priority = 1000 },
-
-  -- Monokai Pro (classic, vibrant monokai with beautiful variants)
-  { 'loctvl842/monokai-pro.nvim', priority = 1000 },
-
-  -- Kanagawa Community Fork (more maintained with updates)
-  { 'projekt0n/github-nvim-theme', priority = 1000 },
-
-  -- Material (based on Material Design palette, lots of styles)
-  { 'marko-cerovac/material.nvim', priority = 1000 },
-
-  -- Oxocarbon (Carbon-inspired, sleek IBM-based palette)
-  { 'nyoom-engineering/oxocarbon.nvim', priority = 1000 },
-
-  -- Palenight (popular purple-toned theme, clean UI)
-  { 'drewtempelmeyer/palenight.vim', priority = 1000 },
-
-  -- Edge (dark and light minimal theme by the author of nightfox)
-  { 'sainnhe/edge', priority = 1000 },
-
-  { 'yasukotelin/shirotelin', priority = 1000 },
-  -- -- TokyoNight Community Fork (extra variants and tweaks)
-  -- { 'olimorris/onedarkpro.nvim', priority = 1000 },
-  --
-  { 'AlexvZyl/nordic.nvim', priority = 1000 },
-
-  { 'datsfilipe/vesper.nvim', priority = 1000 },
-
-  { 'scottmckendry/cyberdream.nvim', priority = 1000 },
-
-  { 'ribru17/bamboo.nvim', priority = 1000 },
-
-  { 'savq/melange-nvim', priority = 1000 },
-  { 'NTBBloodbath/doom-one.nvim', priority = 1000 },
-  { 'xero/miasma.nvim', priority = 1000 },
-  { 'lalitmee/cobalt2.nvim', priority = 1000 },
-  { 'tjdevries/colorbuddy.nvim', priority = 1000 },
-  { 'kdheepak/monochrome.nvim', priority = 1000 },
-  { 'idr4n/github-monochrome.nvim', priority = 1000 },
-  { 'iagorrr/noctis-high-contrast.nvim', priority = 1000 },
-  { 'gantoreno/nvim-gabriel', priority = 1000 },
-  { 'kemiller/vim-ir_black', priority = 1000 },
-  { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
-  { 'wuelnerdotexe/vim-enfocado', priority = 1000 },
 
   --- ALFIE COLORSCHEME ENDS HERE ------------------------
   ---

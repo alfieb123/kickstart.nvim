@@ -8,7 +8,8 @@ local s = colorbuddy.styles
 
 -- Background and UI
 Color.new('background', '#eaf6ff')
-Color.new('soft_shadow', '#e0f0fb')
+Color.new('very_soft_shadow', '#e0f0fb')
+Color.new('soft_shadow', '#d1e0eb')
 Color.new('ink', '#0c111c') -- deep midnight blue
 Color.new('storm', '#1e293b') -- cool slate blue
 Color.new('velvet', '#392040') -- eggplant purple
@@ -26,23 +27,23 @@ Color.new('alert_red', '#ff3366') -- Or any red you like
 Group.new('Normal', c.ink, c.background)
 
 -- Folded stuff
-Group.new('Folded', c.ink, c.soft_shadow)
-Group.new('FoldColumn', c.ink, c.soft_shadow)
+Group.new('Folded', c.ink, c.very_soft_shadow)
+Group.new('FoldColumn', c.ink, c.very_soft_shadow)
 
 -- Cursor & line markers
 Group.new('CursorLine', nil, c.soft_shadow)
-Group.new('CursorLineNr', c.indigo, c.soft_shadow, s.bold)
-Group.new('LineNr', c.storm, c.soft_shadow)
+Group.new('CursorLineNr', c.indigo, c.very_soft_shadow, s.bold)
+Group.new('LineNr', c.storm, c.very_soft_shadow)
 Group.new('Visual', nil, c.soft_shadow)
 
 -- Tabline and interface
-Group.new('TabLine', c.ink, c.soft_shadow)
-Group.new('TabLineSel', c.indigo, c.soft_shadow, s.bold)
-Group.new('TabLineFill', c.soft_shadow, c.soft_shadow)
-Group.new('StatusLine', c.ink, c.soft_shadow)
-Group.new('VertSplit', c.soft_shadow, c.background)
+Group.new('TabLine', c.ink, c.very_soft_shadow)
+Group.new('TabLineSel', c.indigo, c.very_soft_shadow, s.bold)
+Group.new('TabLineFill', c.very_soft_shadow, c.very_soft_shadow)
+Group.new('StatusLine', c.ink, c.very_soft_shadow)
+Group.new('VertSplit', c.very_soft_shadow, c.background)
 Group.new('WinSeparator', c.alert_red, c.background, s.bold)
-Group.new('ColorColumn', nil, c.soft_shadow)
+Group.new('ColorColumn', nil, c.very_soft_shadow)
 
 -- LSP "word under cursor" highlights
 Group.new('LspReferenceText', c.highlight_fg, c.highlight_bg)
@@ -86,13 +87,13 @@ Group.new('@debug', c.dusk, nil)
 
 -- Default fallback
 Group.new('NonText', c.storm, c.background)
-Group.new('Whitespace', c.soft_shadow:dark(), c.background)
+Group.new('Whitespace', c.very_soft_shadow:dark(), c.background)
 Group.new('Todo', c.indigo, nil, s.bold + s.italic)
 
-Group.new('StatusLine', c.ink, c.soft_shadow)
-Group.new('StatusLineNC', c.storm, c.soft_shadow)
-Group.new('ModeMsg', c.velvet, c.soft_shadow)
-Group.new('MoreMsg', c.indigo, c.soft_shadow)
+Group.new('StatusLine', c.ink, c.very_soft_shadow)
+Group.new('StatusLineNC', c.storm, c.very_soft_shadow)
+Group.new('ModeMsg', c.velvet, c.very_soft_shadow)
+Group.new('MoreMsg', c.indigo, c.very_soft_shadow)
 
 Group.new('TodoFgNOTE', c.indigo, nil, s.bold)
 Group.new('TodoBgNOTE', nil, nil)

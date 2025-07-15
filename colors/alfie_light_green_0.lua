@@ -44,6 +44,7 @@ Group.new('LspReferenceRead', c.highlight_fg, c.highlight_bg)
 Group.new('LspReferenceWrite', c.highlight_fg, c.highlight_bg, s.italic)
 
 -- Tree-sitter
+Group.new('PreProc', c.fern:light(), nil)
 Group.new('@comment', c.fern:light(), nil, s.italic)
 Group.new('@keyword', c.moss, nil, s.bold)
 Group.new('@keyword.operator', c.olive, nil)

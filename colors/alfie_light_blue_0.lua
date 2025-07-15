@@ -51,6 +51,7 @@ Group.new('LspReferenceRead', c.highlight_fg, c.highlight_bg)
 Group.new('LspReferenceWrite', c.highlight_fg, c.highlight_bg, s.italic)
 
 -- Tree-sitter & semantic highlighting
+Group.new('PreProc', c.wine:light(), nil)
 Group.new('@comment', c.shadow_purple, nil, s.italic)
 Group.new('@keyword', c.velvet, nil, s.bold)
 Group.new('@keyword.operator', c.wine, nil)

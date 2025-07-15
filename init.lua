@@ -821,12 +821,21 @@ require('lazy').setup({
 
           map('gr', function()
             require('telescope.builtin').lsp_references {
-              path_display = { 'smart' }, -- trims the paths if needed to show filename
+              path_display = { 'smart' },
               include_declaration = true,
               include_current_line = false,
-              fname_width = 100, -- so we can see the damned thing
-              show_line = false, -- this is the line that stops the results showing both the filepath and the line its used.. we can look at the preview window for that!
+              fname_width = 30,
+              show_line = false,
               trim_text = false,
+              layout_config = {
+                horizontal = {
+                  height = 0.99,
+                  preview_cutoff = 120,
+                  prompt_position = 'bottom',
+                  width = 0.99,
+                  preview_width = 0.7, -- make preview wider
+                },
+              },
             }
           end, '[G]oto [R]eferences')
 

@@ -20,6 +20,10 @@ Color.new('highlight_fg', '#311c25')
 Color.new('soft_white', '#f2f6ff')
 Color.new('alert_red', '#ff3366') -- Or any red you like
 
+-- Apply to floating windows
+Group.new('NormalFloat', c.ink, c.soft_shadow)
+Group.new('FloatBorder', c.float_border, c.raspberry, s.bold)
+
 -- Folded stuff
 Group.new('Folded', c.ink, c.soft_shadow)
 Group.new('FoldColumn', c.ink, c.soft_shadow)

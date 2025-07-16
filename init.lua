@@ -805,10 +805,10 @@ require('lazy').setup({
               layout_strategy = 'vertical',
               layout_config = {
                 vertical = {
-                  height = 0.5,
+                  height = 0.99,
                   preview_cutoff = 0, -- force preview no matter what
                   prompt_position = 'bottom',
-                  width = 0.5,
+                  width = 0.99,
                   preview_height = 0.99,
                 },
               },

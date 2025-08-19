@@ -317,6 +317,17 @@ vim.api.nvim_create_autocmd('User', {
     end
   end,
 })
+
+-- open every fold on buffer read/newfile/window‐enter
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile', 'BufWinEnter' }, {
+  callback = function()
+    vim.cmd 'normal! zR'
+  end,
+})
+--
+-- don’t save/restore fold state in sessions
+vim.opt.sessionoptions:remove 'folds'
+
 -- run session restore if there is a session!
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()

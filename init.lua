@@ -258,7 +258,15 @@ vim.keymap.set('n', '<leader>ff', function()
   end
 end, { desc = 'Toggle fold recursively' })
 
-vim.keymap.set('n', '<leader>bod', ':%bd|e#|bd#<CR>', { desc = '[B]uffer [O]ther [D]elete' })
+-- vim.keymap.set('n', '<leader>bod', ':%bd|e#|bd#<CR>', { desc = '[B]uffer [O]ther [D]elete' })
+vim.keymap.set('n', '<leader>bod', function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.fn.buflisted(buf) == 1 then
+      vim.api.nvim_buf_delete(buf, { force = true }) -- set to false if you want prompts on modified buffers
+    end
+  end
+end, { desc = '[B]uffer [O]ther [D]elete' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

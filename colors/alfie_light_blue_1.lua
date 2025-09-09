@@ -28,6 +28,14 @@ Color.new('highlight_fg', '#141d28') -- was #1a2633
 Color.new('soft_white', '#e6f0fa') -- was #f2f6ff
 Color.new('alert_red', '#ff3355') -- same or tweak as needed
 
+-- Diagnostic colors
+Color.new('todo_warning', '#b85c00') -- Rich dark amber
+Color.new('todo_error', '#7a1c1c') -- Deep wine tone
+
+-- Diagnostic color assignment
+Group.new('DiagnosticWarn', c.todo_warning, nil)
+Group.new('DiagnosticError', c.todo_error, nil, s.bold)
+
 -- Apply to floating windows
 Group.new('NormalFloat', c.ink, c.soft_shadow)
 Group.new('FloatBorder', c.float_border, c.velvet, s.bold)
